@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".views.startFragment">
+    tools:context=".home.homeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:foregroundGravity="center_vertical|center">
 
         <EditText
             android:id="@+id/txtKeyword"
@@ -87,6 +87,21 @@
             android:src="@mipmap/image3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+        <Button
+            android:id="@+id/txtSearch"
+            android:layout_width="162dp"
+            android:layout_height="61dp"
+            android:layout_marginTop="404dp"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="@font/jockey_one"
+            android:gravity="center|center_vertical"
+            android:text="Buscar"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

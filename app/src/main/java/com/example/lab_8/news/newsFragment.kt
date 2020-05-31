@@ -1,4 +1,4 @@
-package com.example.lab_8.Home
+package com.example.lab_8.news
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -9,24 +9,24 @@ import android.view.ViewGroup
 
 import com.example.lab_8.R
 
-class home : Fragment() {
+class news : Fragment() {
 
     companion object {
-        fun newInstance() = home()
+        fun newInstance() = news()
     }
 
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var viewModel: NewsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.home_fragment, container, false)
+        return inflater.inflate(R.layout.news_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

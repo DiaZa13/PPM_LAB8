@@ -1,4 +1,4 @@
-package com.example.lab_8.Home
+package com.example.lab_8.home
 
 import androidx.lifecycle.ViewModel
 
