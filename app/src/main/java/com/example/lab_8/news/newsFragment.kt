@@ -9,10 +9,10 @@ import android.view.ViewGroup
 
 import com.example.lab_8.R
 
-class news : Fragment() {
+class newsFragment : Fragment() {
 
     companion object {
-        fun newInstance() = news()
+        fun newInstance() = newsFragment()
     }
 
     private lateinit var viewModel: NewsViewModel
