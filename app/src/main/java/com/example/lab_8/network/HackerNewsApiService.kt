@@ -10,9 +10,9 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-private const val BASE_URL = "http://hn.algolia.com/api/"
+private const val BASE_URL = "https://hn.algolia.com/api/v1/"
 
-enum class GithubApiStatus {
+enum class HackerNewsApiStatus {
     START,
     LOADING,
     ERROR,
@@ -49,9 +49,12 @@ interface HackerNewsApiService {
      * @Query("query", encoded = true) query: String?
      */
     @GET("search")
-    fun getProperties():
+    fun getProperties(
+        @Query("query", encoded = true) keyWord: String?,
+        @Query("tags") story: String
+    ):
     // The Coroutine Call Adapter allows us to return a Deferred, a Job with a result
-            Deferred<List<News>>
+            Deferred<News>
 
 }
 

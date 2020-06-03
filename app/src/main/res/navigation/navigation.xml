@@ -9,8 +9,8 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.lab_8.home.homeFragment"
-        android:label="home_fragment"
-        tools:layout="@layout/home_fragment" >
+        android:label="BUSQUEDA"
+        tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
@@ -18,6 +18,6 @@
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.example.lab_8.news.newsFragment"
-        android:label="news_fragment"
+        android:label="NOTICIAS"
         tools:layout="@layout/news_fragment" />
 </navigation>

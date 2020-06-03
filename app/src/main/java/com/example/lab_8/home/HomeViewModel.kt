@@ -1,41 +1,50 @@
 package com.example.lab_8.home
 
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.lab_8.network.HackerNewsApi
+import com.example.lab_8.network.HackerNewsApiStatus
 import com.example.lab_8.network.News
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class HomeViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
 
-    private val _prueba = MutableLiveData<String>()
-    val prueba: LiveData<String>
-    get() = _prueba
+    private val _status = MutableLiveData<HackerNewsApiStatus>()
+    val status: LiveData<HackerNewsApiStatus>
+    get() = _status
+
+    private val _news = MutableLiveData<String>()
+    val news: LiveData<String>
+    get() = _news
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
+
     init{
-        getHackersNewsProperties()
+        startStatus()
     }
 
-    private fun getHackersNewsProperties() {
+    fun startStatus(){
+        _status.value = HackerNewsApiStatus.START
+    }
+    fun searchNews(keyWord:String, tag:String,points:String,author:String) {
         coroutineScope.launch {
-
-            var getPropertiesDeferred = HackerNewsApi.retrofitService.getProperties()
+            val authors = "author_"+author
+            val  getPropertiesDeferred = HackerNewsApi.retrofitService.getProperties(keyWord,tag)
             try{
+                _status.value = HackerNewsApiStatus.LOADING
                 var listResult = getPropertiesDeferred.await()
-                _prueba.value = "Succes: ${listResult?.size} stories found"
-            }catch (t: Throwable){
-                _prueba.value = "Failrue: " + t.message
+                _status.value = HackerNewsApiStatus.DONE
+                _news.value = listResult.urlNews
+            }catch (e: Exception){
+                _status.value = HackerNewsApiStatus.ERROR
+                throw e
             }
 
         }
