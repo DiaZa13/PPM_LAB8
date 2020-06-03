@@ -14,8 +14,8 @@ import javax.net.ssl.HandshakeCompletedEvent
 
 class NewsViewModel () : ViewModel() {
 
-    private val _hackerNews = MutableLiveData<List<News>>()
-    val hackerNews: LiveData<List<News>>
+    private val _hackerNews = MutableLiveData<News>()
+    val hackerNews: LiveData<News>
         get() = _hackerNews
 
     private val _status = MutableLiveData<HackerNewsApiStatus>()
@@ -32,7 +32,7 @@ class NewsViewModel () : ViewModel() {
 
     init {
         startStatus()
-        getNews()
+        getNews(keyWord = "foo",points = "6015",author = "Cogito")
     }
 
     fun startStatus(){
@@ -47,13 +47,13 @@ class NewsViewModel () : ViewModel() {
         coroutineScope.launch {
             val newsDeferred = HackerNewsApi.retrofitService.getProperties(keyWord,points)
             try {
-                _status.value = NewsApiStatus.LOADING
+                _status.value = HackerNewsApiStatus.LOADING
                 val news = newsDeferred.await()
-                _status.value = NewsApiStatus.DONE
+                _status.value = HackerNewsApiStatus.DONE
                 _hackerNews.value = news
             } catch (e: Exception){
-                _status.value = NewsApiStatus.ERROR
-                _hackerNews.value = emptyList()
+                _status.value = HackerNewsApiStatus.ERROR
+                _hackerNews.value = null
             }
         }
     }
